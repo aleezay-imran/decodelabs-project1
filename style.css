@@ -1,0 +1,203 @@
+/* Reset & Base Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 2025 Theme Color Palette */
+    --mocha-mousse: #A8956F;  /* Stability & Grounding */
+    --ethereal-blue: #A0D4E0; /* Trust & Accent */
+    --moonlit-grey: #F2F0EA;  /* Warm Neutral Background */
+    --dark-charcoal: #2B2A27;  /* High Contrast Typography */
+    
+    /* Typography Constraints */
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--moonlit-grey);
+    color: var(--dark-charcoal);
+    line-height: 1.6;
+}
+
+/* Fluid Typography using clamp() */
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 3rem); /* Screen ke mutabiq automatically scale hoga */
+    font-weight: 700;
+    color: var(--dark-charcoal);
+}
+
+h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+/* --- HEADER & NAVIGATION --- */
+header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--dark-charcoal);
+}
+
+/* Mobile Default Navigation Link Styles */
+.nav-links {
+    list-style: none;
+    display: none; /* Initially hidden on mobile */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Active class which we will trigger via JavaScript later */
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    text-align: center;
+    margin: 0.8rem 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-charcoal);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--mocha-mousse);
+}
+
+/* Hamburger Menu Button */
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--dark-charcoal);
+}
+
+/* --- RESPONSIVE BREAKPOINT (DESKTOP) --- */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none; /* Desktop par hamburger button hide ho jayega */
+    }
+
+    .nav-links {
+        display: flex; /* Links direct show honge inline flat layout mein */
+        position: static;
+        width: auto;
+        flex-direction: row;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .nav-links li {
+        margin: 0 1rem;
+    }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    background: linear-gradient(135deg, #ffffff 0%, var(--moonlit-grey) 100%);
+    padding: clamp(2rem, 8vw, 5rem) 1.5rem; /* Fluid padding screen size ke hisab se */
+    text-align: center;
+    border-bottom: 1px solid rgba(168, 149, 111, 0.2); /* Subtle Mocha Mousse border */
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: #555555;
+    max-width: 600px;
+    margin: 1rem auto 2rem auto;
+}
+
+/* 2025 Aesthetic Call-to-Action Button */
+.btn-primary {
+    background-color: var(--mocha-mousse);
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(168, 149, 111, 0.15);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-charcoal);
+    transform: translateY(-2px);
+}
+
+/* --- MAIN CONTENT & SIDEBAR LAYOUT (CSS GRID) --- */
+.content-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile view: Single column stack layout */
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--ethereal-blue); /* Trust & Accent color indicator */
+}
+
+.main-content {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* --- RESPONSIVE GRID SWITCH (DESKTOP) --- */
+@media (min-width: 768px) {
+    .content-layout {
+        /* Desktop par: Sidebar 1 fraction space lega aur Main Content 3 fractions space lega */
+        grid-template-columns: 1fr 3fr; 
+    }
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: var(--dark-charcoal);
+    color: var(--moonlit-grey);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    margin-top: 3rem;
+}
